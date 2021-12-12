@@ -55,9 +55,8 @@ public class RjSnakeAndLadder {
         List<String> players = p.getPlayers();
         SnakesAndLadderBoard sb = new SnakesAndLadderBoard(headsAndTails, startsAndEnds, playersPositions, players, d);
         
-        while(noOfPlayers > 1){
+        while(noOfPlayers > 1){ 
             for(int i = 0; i < noOfPlayers; i++){
-                int diceValue = d.rollADice();
                 System.out.println(sb.setAndGetNextPosition(i));
             }
             
