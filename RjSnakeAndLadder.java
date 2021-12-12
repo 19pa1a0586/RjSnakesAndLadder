@@ -85,9 +85,9 @@ public class RjSnakeAndLadder {
         }
         
         System.out.println("*********************************Game is Completed*********************************");
-        
+        System.out.println("                                      Winners");
         for(int i = 0; i < winners.size(); i++){
-            System.out.println(winners.get(i)+" Secured Position "+(i+1));
+            System.out.println("                               "+winners.get(i)+" Secured Position "+(i+1));
         }
     }
 }
