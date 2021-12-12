@@ -53,52 +53,17 @@ public class RjSnakeAndLadder {
         Map<Integer, Integer> startsAndEnds = l.getStartsAndEnds();
         Map<String, Integer> playersPositions = p.getPlayersNames();
         List<String> players = p.getPlayers();
-        List<String> winners = new ArrayList<>();
+        SnakesAndLadderBoard sb = new SnakesAndLadderBoard(headsAndTails, startsAndEnds, playersPositions, players, d);
         
         while(noOfPlayers > 1){
             for(int i = 0; i < noOfPlayers; i++){
                 int diceValue = d.rollADice();
-                String playerName = players.get(i);
-                int currPosition = playersPositions.get(playerName);
-                if(currPosition+diceValue <= 100){
-                    int nextPosition;
-                    if(headsAndTails.containsKey(currPosition+diceValue)){
-                        nextPosition = headsAndTails.get(currPosition+diceValue);
-                    }
-                    else if(startsAndEnds.containsKey(currPosition+diceValue)){
-                        nextPosition = startsAndEnds.get(currPosition+diceValue);
-                    }
-                    else{
-                        nextPosition = currPosition+diceValue;
-                    }
-                    int prevPosition = nextPosition;
-                    while(headsAndTails.containsKey(nextPosition) || startsAndEnds.containsKey(nextPosition)){
-                        if(headsAndTails.containsKey(nextPosition)){
-                            nextPosition = headsAndTails.get(nextPosition);
-                        }
-                        else if(startsAndEnds.containsKey(nextPosition)){
-                            nextPosition = startsAndEnds.get(nextPosition);
-                        }
-                        if(prevPosition == nextPosition){
-//                            System.out.println("loop");
-                            nextPosition = currPosition;
-                            break;
-                        }
-                    }
-                    System.out.println(playerName+" rolled a "+diceValue+" and moved from "+currPosition+" to "+nextPosition);
-                    playersPositions.put(playerName, nextPosition);
-                }
-                else{
-                    System.out.println(playerName+" rolled a "+diceValue+" and moved from "+currPosition+" to "+currPosition);
-                }
-                if(playersPositions.get(playerName) == 100){
-                    winners.add(playerName);
-                    players.remove(playerName);
-                    noOfPlayers--;
-                }
+                System.out.println(sb.setAndGetNextPosition(i));
             }
+            
         }
         
+        List<String> winners = sb.getWinners();
         System.out.println("*********************************Game is Completed*********************************");
         System.out.println("                                      Winners");
         for(int i = 0; i < winners.size(); i++){
@@ -107,7 +72,7 @@ public class RjSnakeAndLadder {
     }
 }
 
-
+//SAMPLE INPUT : 
 
 //Enter number of Snakes : 3
 //Enter head 1: 64
@@ -129,6 +94,9 @@ public class RjSnakeAndLadder {
 //Enter Player 5: ravi
 //Enter minimum value of Dice : 1
 //Enter maximum value of Dice : 6
+
+//SAMPLE OUTPUT : 
+
 //siva rolled a 4 and moved from 0 to 4
 //rishika rolled a 3 and moved from 0 to 3
 //raju rolled a 4 and moved from 0 to 4
